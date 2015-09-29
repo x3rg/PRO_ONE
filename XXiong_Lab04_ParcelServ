@@ -1,0 +1,95 @@
+import java.util.Scanner;
+
+//XXiong_Lab04_ParcelServ.java
+//09/27/2015
+//Xeng Xiong
+//CH3 - CS1013 - Programming One
+//Lab04_ParcelServ
+
+public class XXiong_Lab04_ParcelServ
+{
+	public static void main(String[] args) 
+	{
+		Scanner keyboard = new Scanner (System.in);
+		
+		String 
+			custName,				//Hold customer name
+			inf = "Unlimited";		//Printf string(%s)
+		
+		char pricePak;				//Hold package selection
+			
+		final double 
+				PAK_A = 8.95,		//Price of package A
+				PAK_B = 12.95,		//Price of package B
+				PAK_C = 25.50,		//Price of package C
+				SUR_A = 3.00,		//Surcharge(s) of package A
+				SUR_B = 2.00;		//Surcharge(s) of package B
+		int
+				delA = 8,			//Max delivery package A
+				delB = 12,			//Max delivery package B
+				numPacks;			//Hold user input of how many deliveries
+	
+		System.out.print("Please input your name: ");
+		custName = keyboard.nextLine();
+		
+		System.out.print ("The prices for services "
+				+ "are available in three categories of packages: A, B, or C.\n");
+		
+		//Displays detailed service packages to customer
+		System.out.printf("\t\nSERVICE PACK A - For $%.2f a month, %d deliveries may be made,\n"
+				+ "\tand the cost for each additional delivery will be $%.02f.\n", PAK_A, delA, SUR_A);
+		System.out.printf("\t\nSERVICE PACK B - For $%.2f a month, %d deliveries may be made,\n"
+				+ "\tand the cost for each additional delivery will be $%.02f.\n", PAK_B, delB, SUR_B);
+		System.out.printf("\t\nSERVICE PACK C - %s deliveries may be made for $%.02f.", inf, PAK_C);
+		
+		//Input for package purchase
+		System.out.print("\n\nPlease input the service package"
+				+ " you would like to buy? A, B, or C? ");
+		
+		String input1 = keyboard.nextLine();	//Hold service package
+		pricePak = input1.charAt(0);			//Collect first character
+
+		//Collect user input for numPacks variable
+		System.out.print("\n" +custName+ ", how many packages do you want to deliver? ");
+		numPacks = keyboard.nextInt();		
+		
+		//Displays total for user
+		switch(pricePak)
+		{
+			case 'a':
+			case 'A':
+				if (numPacks > 8)
+				{
+					System.out.printf("" +custName+ ", your total cost is $" + (PAK_A + (SUR_A * (numPacks - delA))));
+				}
+					else 
+					{
+					System.out.printf("" +custName+ ", your total cost is $%.2f.", PAK_A);
+					}
+				break;
+				
+			case 'b':
+			case 'B':
+				if (numPacks > 15)
+				{
+					System.out.printf("" +custName+ ", your total cost is $" + (PAK_B + (SUR_B * (numPacks - delB))));
+				}
+					else
+					{
+					System.out.printf("" +custName+ ", your total cost is $%.2f.", PAK_B);
+					}
+				break;
+				
+			case 'c':
+			case 'C':
+				if (numPacks >= 16)
+				System.out.printf("" +custName+ ", your total is $%.2f."
+						+ " %s amount of deleiveries may be made for $%.2f per month.", PAK_C, inf, PAK_C);
+				break;
+				
+			default:
+				System.out.println("You have selected an invalid package selection");	
+		}
+		keyboard.close();
+	}
+}
